@@ -1,0 +1,27 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'java'
+}
+
+group 'net.revelationmc'
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+    compileOnly 'net.md-5:bungeecord-api:1.16-R0.5-SNAPSHOT'
+
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from(sourceSets.main.resources.srcDirs) {
+        expand 'version': project.version
+        include 'bungee.yml'
+    }
+}
